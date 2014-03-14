@@ -1,0 +1,80 @@
+Enter file contents here
+
+#vertex_list = [[2,3],[4,5],[6,],[],[7,8],[9],[],[],[],[]]
+
+start_vertex = 0
+
+#vertex_list = [[2,3,6],[5,7],[4],[],[],[8],[],[9,10],[],[]]
+
+vertex_list = [[2,3,7,8,19],[5,9],[4,12],[],[6],[16,17],[10,13],[14,20],[],[11,18],[],[15],[],[],[],[],[],[],[],[]]
+
+sum = 0
+
+result = 0
+
+children_count = [[1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12],[13],[14],[15],[16],[17],[18],[19],[20]]
+
+ 
+def post_order(vertex_list,start_vertex):
+
+ global sum
+
+ for current_vertex in vertex_list[start_vertex]:
+
+post_order(vertex_list,current_vertex-1)
+
+ #print(start_vertex)
+
+sum += 1
+
+ #children_count[start_vertex].append(len(vertex_list[start_vertex]))
+
+ return sum
+
+
+
+
+
+def count_to_delete(vertex_list, start_vertex):
+
+ #result = counting on this level
+
+ global sum
+
+ global result
+
+ for current_child in vertex_list[start_vertex]:
+
+sum = 0
+
+post_order(vertex_list, current_child-1)
+
+ if sum % 2 == 0 and sum > 2:
+
+result += 1
+
+sum = 0
+
+count_to_delete(vertex_list, current_child-1)
+
+ #post_order(vertex_list, current_child+1)
+
+ if sum % 2 == 0 and sum == 2:
+
+result += 1
+
+sum = 0
+
+ return result
+
+ #result = post_order(vertex_list,0)
+
+ #for current_child in vertex_list[start_vertex]:
+ 
+　
+
+ #for every child result += count_to_delete(vertex_list, current_child)
+ 
+#print(post_order(vertex_list,start_vertex))
+
+print(count_to_delete(vertex_list,start_vertex)) 
